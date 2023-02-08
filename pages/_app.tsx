@@ -5,6 +5,7 @@ import { theme } from "styles/theme";
 import { SWRConfig } from "swr";
 import axios from "axios";
 import "../styles/index.css";
+import Layout from "@components/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+
         <Component {...pageProps} />
       </ThemeProvider>
     </SWRConfig>
