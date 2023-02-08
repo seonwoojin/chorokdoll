@@ -1,8 +1,6 @@
 import WithHead from "@libs/client/WithHead";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { NextPage } from "next";
 import Image from "next/image";
-import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,7 +10,7 @@ const Container = styled.div`
   align-items: center;
   width: 100vw;
   padding-top: 300px;
-  height: 2000vh;
+  height: 200vh;
 `;
 
 const ContextWrapper = styled.div`
@@ -22,7 +20,6 @@ const ContextWrapper = styled.div`
   place-items: center;
   width: 80%;
   height: auto;
-  margin-bottom: 350px;
   background-color: rgba(0, 0, 0, 0.6);
   gap: 1px;
   div {
@@ -55,30 +52,7 @@ const ContextWrapper = styled.div`
   }
 `;
 
-const HistoryWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  height: 30vh;
-  margin-bottom: 350px;
-  background-color: teal;
-`;
-
-const ScrollBar = styled(motion.div)`
-  width: 1px;
-  height: 100%;
-  background-color: black;
-`;
-
 const Home: NextPage = () => {
-  const ref = useRef<HTMLDivElement>();
-  const { scrollYProgress } = useScroll({ target: ref });
-  const [scroll, setScroll] = useState(0);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setScroll(latest);
-    console.log(latest);
-  });
   return (
     <Container>
       <ContextWrapper>
@@ -125,19 +99,6 @@ const Home: NextPage = () => {
           <Image src={"/images/jmy.jpg"} width={200} height={248} alt="" />
         </div>
       </ContextWrapper>
-      <HistoryWrapper>
-        <ScrollBar
-          ref={(element) => {
-            if (element !== null) {
-              ref.current = element;
-            }
-          }}
-          style={{
-            scaleY: 1 - scrollYProgress.get(),
-            transformOrigin: "top",
-          }}
-        ></ScrollBar>
-      </HistoryWrapper>
     </Container>
   );
 };
