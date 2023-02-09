@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import { motion, useScroll } from "framer-motion";
 
-const AwardList = styled(motion.div)`
+const AwardList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@ const AwardList = styled(motion.div)`
   margin-bottom: 200px;
 `;
 
-const Award = styled.div`
+const Award = styled(motion.div)`
   display: flex;
   align-items: center;
   width: 80%;
@@ -51,26 +51,36 @@ interface Props {
   isLong?: boolean;
 }
 
-export default function List({ datas, isLong = false }: Props) {
+interface ItemProps {
+  data: { date: string; description: string; place: string };
+}
+
+const Item = ({ data }: ItemProps) => {
   const ref = useRef(null);
   const { scrollYProgress, scrollY } = useScroll({
     target: ref,
     offset: ["start end", "end center"],
   });
   return (
-    <AwardList
+    <Award
       ref={ref}
       style={{
-        opacity: isLong ? 1 : scrollYProgress,
+        opacity: scrollYProgress,
         transformOrigin: "top",
       }}
     >
+      <div>{data.date}</div>
+      <div>{data.description}</div>
+      <div>{data.place}</div>
+    </Award>
+  );
+};
+
+export default function List({ datas, isLong = false }: Props) {
+  return (
+    <AwardList>
       {datas.map((data, index) => (
-        <Award key={index}>
-          <div>{data.date}</div>
-          <div>{data.description}</div>
-          <div>{data.place}</div>
-        </Award>
+        <Item key={index} data={data} />
       ))}
     </AwardList>
   );

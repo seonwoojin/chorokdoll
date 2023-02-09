@@ -31,29 +31,15 @@ const HistoryWrapper = styled(motion.div)`
   }
 `;
 
-const cardVariants: Variants = {
-  offscreen: {
-    opacity: 0,
-  },
-  onscreen: {
-    opacity: 1,
-    transition: {
-      type: "linear",
-      bounce: 0.4,
-      duration: 1,
-    },
-  },
-};
-
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function History({ children }: LayoutProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress, scrollY } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end center"],
+    offset: ["start center", "end center"],
   });
   return (
     <HistoryWrapper
@@ -61,6 +47,7 @@ export default function History({ children }: LayoutProps) {
       style={{
         opacity: scrollYProgress,
         transformOrigin: "top",
+        transitionDuration: "1s",
       }}
     >
       {children}

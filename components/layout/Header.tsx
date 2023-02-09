@@ -24,6 +24,8 @@ const HeaderWrapper = styled.div`
   }
   .logo {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     font-size: 36px;
     gap: 10px;
@@ -43,7 +45,7 @@ const HeaderItemContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 70%;
+  width: 80%;
   height: 100%;
   a {
     width: 100%;
@@ -106,7 +108,7 @@ export default function Header() {
             <Link href={"/"}>
               <div className="logo">
                 <span>정문영의</span>
-                <span>초록인형</span>
+                <span>초록인형연구소</span>
               </div>
             </Link>
             <HeaderItemContainer>
